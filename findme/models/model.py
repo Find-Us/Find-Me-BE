@@ -80,3 +80,13 @@ class C_Song_Recommend(models.Model):
     def __str__(self):
         return self.title
 
+
+# class Bookmark(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookmarks')
+#     content = models.JSONField()
+#     created_time = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         unique_together = ('user', 'content')
+    
+

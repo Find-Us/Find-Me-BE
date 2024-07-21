@@ -38,11 +38,16 @@ class ASongRecommendSerializer(serializers.ModelSerializer):
 
 class BSongRecommendSerializer(serializers.ModelSerializer):
     class Meta:
-        model = A_Song_Recommend
+        model = B_Song_Recommend
         fields = '__all__'
 
 class CSongRecommendSerializer(serializers.ModelSerializer):
     class Meta:
-        model = A_Song_Recommend
+        model = C_Song_Recommend
         fields = '__all__'
+
+# class BookmarkSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Bookmark
+#         fields = '__all__'
 
