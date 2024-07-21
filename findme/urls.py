@@ -1,7 +1,6 @@
 from django.urls import path
-from views import base_views
+from findme.views.base_views import recommend_content
 
 urlpatterns = [
-    # base_views.py
-    path('', base_views.index, name='index'),
+    path('', recommend_content, name='recommend_content'),
 ]
