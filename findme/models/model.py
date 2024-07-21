@@ -28,3 +28,49 @@ class C_Movie_Recommendation(models.Model):
     def __str__(self):
         return self.title
     
+class A_Book_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='books/A')
+
+    def __str__(self):
+        return self.title
+    
+class B_Book_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='books/B')
+
+    def __str__(self):
+        return self.title
+    
+class C_Book_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='books/C')
+
+    def __str__(self):
+        return self.title
+
+class A_Song_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    singer = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='sings/A')
+
+class B_Song_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    singer = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='sings/B')
+
+
+class C_Song_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    singer = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='sings/C')
+
