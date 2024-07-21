@@ -58,19 +58,25 @@ class C_Book_Recommend(models.Model):
 class A_Song_Recommend(models.Model):
     title = models.CharField(max_length=300)
     singer = models.CharField(max_length=300)
-    description = models.TextField()
-    image = models.ImageField(upload_to='sings/A')
+    image = models.ImageField(upload_to='songs/A')
+
+    def __str__(self):
+        return self.title
 
 class B_Song_Recommend(models.Model):
     title = models.CharField(max_length=300)
     singer = models.CharField(max_length=300)
-    description = models.TextField()
-    image = models.ImageField(upload_to='sings/B')
+    image = models.ImageField(upload_to='songs/B')
+
+    def __str__(self):
+        return self.title
 
 
 class C_Song_Recommend(models.Model):
     title = models.CharField(max_length=300)
     singer = models.CharField(max_length=300)
-    description = models.TextField()
-    image = models.ImageField(upload_to='sings/C')
+    image = models.ImageField(upload_to='songs/C')
+
+    def __str__(self):
+        return self.title
 
