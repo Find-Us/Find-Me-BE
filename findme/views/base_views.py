@@ -83,3 +83,18 @@ def get_saved_content(request, nickname):
     serializer = SaveContentSerializer(saved_contents, many = True)
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+def delete_saved_content(request):
+    nickname = request.data.get('nickname')
+    title = request.data.get('title')
+
+    if not nickname or not title:
+        return Response({"error": "올바른 요청이 아닙니다."}, status = 400)
+
+    try:
+        saved_content = SavedContent.objects.get(nickname=nickname, title = title)
+        saved_content.delete()
+        return Response({"message": "해당 컨텐츠를 삭제하였습니다."}, status = 200)
+    except SavedContent.DoesNotExist:
+        return Response({"error": "컨텐츠를 찾을 수 없습니다."}, status = 404)
+
