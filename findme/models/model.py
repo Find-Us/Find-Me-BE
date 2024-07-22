@@ -28,6 +28,15 @@ class C_Movie_Recommendation(models.Model):
     def __str__(self):
         return self.title
     
+class D_Movie_Recommendation(models.Model):
+    title = models.CharField(max_length=200)
+    actors = models.CharField(max_length=500)
+    description = models.TextField()
+    image = models.ImageField(upload_to='posters/D')
+
+    def __str__(self):
+        return self.title
+    
 class A_Book_Recommend(models.Model):
     title = models.CharField(max_length=300)
     author = models.CharField(max_length=300)
@@ -51,6 +60,15 @@ class C_Book_Recommend(models.Model):
     author = models.CharField(max_length=300)
     description = models.TextField()
     image = models.ImageField(upload_to='books/C')
+
+    def __str__(self):
+        return self.title
+    
+class D_Book_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    author = models.CharField(max_length=300)
+    description = models.TextField()
+    image = models.ImageField(upload_to='books/D')
 
     def __str__(self):
         return self.title
@@ -81,12 +99,25 @@ class C_Song_Recommend(models.Model):
         return self.title
 
 
-# class Bookmark(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookmarks')
-#     content = models.JSONField()
-#     created_time = models.DateTimeField(auto_now_add=True)
+class D_Song_Recommend(models.Model):
+    title = models.CharField(max_length=300)
+    singer = models.CharField(max_length=300)
+    image = models.ImageField(upload_to='songs/D')
 
-#     class Meta:
-#         unique_together = ('user', 'content')
-    
+    def __str__(self):
+        return self.title
+
+class SavedContent(models.Model):
+    nickname = models.CharField(max_length=200)
+    content_type = models.CharField(max_length=50)
+    content_id = models.IntegerField()
+    title = models.CharField(max_length=300)
+    actors = models.CharField(max_length=500, blank=True, null=True)
+    author = models.CharField(max_length=300, blank=True, null=True)
+    singer = models.CharField(max_length=300, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    image_url = models.CharField(max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.nickname} - {self.title}'
 
