@@ -110,7 +110,6 @@ class D_Song_Recommend(models.Model):
 class SavedContent(models.Model):
     nickname = models.CharField(max_length=200)
     content_type = models.CharField(max_length=50)
-    content_id = models.IntegerField()
     title = models.CharField(max_length=300)
     actors = models.CharField(max_length=500, blank=True, null=True)
     author = models.CharField(max_length=300, blank=True, null=True)

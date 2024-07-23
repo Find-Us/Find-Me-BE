@@ -26,46 +26,21 @@ def recommend_content(request):
 
     if max_group == 'A':
         return Response({"result" : "A"})
-        # movies = A_Movie_Recommendation.objects.order_by('?')[:3]
-        # books = A_Book_Recommend.objects.order_by('?')[:3]
-        # songs = A_Song_Recommend.objects.order_by('?')[:3]
-        # movie_serializer = AMovieRecommendSerializer(movies, many=True)
-        # book_serializer = ABookRecommendSerializer(books, many=True)
-        # song_serializer = ASongRecommendSerializer(songs, many=True)
-
-        
 
     elif max_group == 'B':
-        # movies = B_Movie_Recommendation.objects.order_by('?')[:3]
-        # books = B_Book_Recommend.objects.order_by('?')[:3]
-        # songs = B_Song_Recommend.objects.order_by('?')[:3]
-        # movie_serializer = BMovieRecommendSerializer(movies, many=True)
-        # book_serializer = BBookRecommendSerializer(books, many=True)
-        # song_serializer = BSongRecommendSerializer(songs, many=True)
         return Response({"result" : "B"})
 
 
     elif max_group == 'C':
-        # movies = C_Movie_Recommendation.objects.order_by('?')[:3]
-        # books = C_Book_Recommend.objects.order_by('?')[:3]
-        # songs = C_Song_Recommend.objects.order_by('?')[:3]
-        # movie_serializer = CMovieRecommendSerializer(movies, many=True)
-        # book_serializer = CBookRecommendSerializer(books, many=True)
-        # song_serializer = CSongRecommendSerializer(songs, many=True)
         return Response({"result" : "C"})
     
     else:
-        # movies = D_Movie_Recommendation.objects.order_by('?')[:3]
-        # books = D_Book_Recommend.objects.order_by('?')[:3]
-        # songs = D_Song_Recommend.objects.order_by('?')[:3]
-        # movie_serializer = DMovieRecommendSerializer(movies, many=True)
-        # book_serializer = DBookRecommendSerializer(books, many=True)
-        # song_serializer = DSongRecommendSerializer(songs, many=True)
         return Response({"result" : "D"})
 
 @api_view(['POST'])
 def recommend_content2(request):
     max_group = request.data.get('keyword')
+    content = request.data.get('content_type')
 
     if max_group == 'A':
         movies = A_Movie_Recommendation.objects.order_by('?')[:3]
@@ -103,13 +78,26 @@ def recommend_content2(request):
         movie_serializer = DMovieRecommendSerializer(movies, many=True)
         book_serializer = DBookRecommendSerializer(books, many=True)
         song_serializer = DSongRecommendSerializer(songs, many=True)
-        
 
-    response_data = {
-        'movies' : movie_serializer.data,
-        'books' : book_serializer.data,
-        'songs' : song_serializer.data,
-    }
+
+    if content == 'movie':
+        response_data = {
+            'movies' : movie_serializer.data,
+        }
+    elif content == 'book':
+        response_data = {
+            'books' : book_serializer.data,
+        }
+    elif content == 'song':
+        response_data = {
+            'songs' : book_serializer.data,
+        }
+    else:
+        response_data = {
+            'movies' : movie_serializer.data,
+            'books' : book_serializer.data,
+            'songs' : song_serializer.data,
+        }
 
     return Response(response_data)
 
