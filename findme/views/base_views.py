@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from findme.models.model import A_Movie_Recommendation, B_Movie_Recommendation, C_Movie_Recommendation, D_Movie_Recommendation, A_Book_Recommend, B_Book_Recommend, C_Book_Recommend,D_Book_Recommend, A_Song_Recommend, B_Song_Recommend, C_Song_Recommend, D_Song_Recommend, SavedContent
 from findme.serializers import AMovieRecommendSerializer, BMovieRecommendSerializer, CMovieRecommendSerializer,DMovieRecommendSerializer, ABookRecommendSerializer, BBookRecommendSerializer, CBookRecommendSerializer,DBookRecommendSerializer, ASongRecommendSerializer, BSongRecommendSerializer, CSongRecommendSerializer, DSongRecommendSerializer, SaveContentSerializer
-
+import random
 
 @api_view(['POST'])
 def recommend_content(request):
@@ -20,7 +20,52 @@ def recommend_content(request):
         'D': sum([scores[1], scores[7], scores[8]]),
     }
 
-    max_group = max(group_sums, key=group_sums.get)
+    max_score = max(group_sums.values())
+    max_groups = [group for group, score in group_sums.items() if score == max_score]
+    max_group = random.choice(max_groups)
+
+    if max_group == 'A':
+        return Response({"result" : "A"})
+        # movies = A_Movie_Recommendation.objects.order_by('?')[:3]
+        # books = A_Book_Recommend.objects.order_by('?')[:3]
+        # songs = A_Song_Recommend.objects.order_by('?')[:3]
+        # movie_serializer = AMovieRecommendSerializer(movies, many=True)
+        # book_serializer = ABookRecommendSerializer(books, many=True)
+        # song_serializer = ASongRecommendSerializer(songs, many=True)
+
+        
+
+    elif max_group == 'B':
+        # movies = B_Movie_Recommendation.objects.order_by('?')[:3]
+        # books = B_Book_Recommend.objects.order_by('?')[:3]
+        # songs = B_Song_Recommend.objects.order_by('?')[:3]
+        # movie_serializer = BMovieRecommendSerializer(movies, many=True)
+        # book_serializer = BBookRecommendSerializer(books, many=True)
+        # song_serializer = BSongRecommendSerializer(songs, many=True)
+        return Response({"result" : "B"})
+
+
+    elif max_group == 'C':
+        # movies = C_Movie_Recommendation.objects.order_by('?')[:3]
+        # books = C_Book_Recommend.objects.order_by('?')[:3]
+        # songs = C_Song_Recommend.objects.order_by('?')[:3]
+        # movie_serializer = CMovieRecommendSerializer(movies, many=True)
+        # book_serializer = CBookRecommendSerializer(books, many=True)
+        # song_serializer = CSongRecommendSerializer(songs, many=True)
+        return Response({"result" : "C"})
+    
+    else:
+        # movies = D_Movie_Recommendation.objects.order_by('?')[:3]
+        # books = D_Book_Recommend.objects.order_by('?')[:3]
+        # songs = D_Song_Recommend.objects.order_by('?')[:3]
+        # movie_serializer = DMovieRecommendSerializer(movies, many=True)
+        # book_serializer = DBookRecommendSerializer(books, many=True)
+        # song_serializer = DSongRecommendSerializer(songs, many=True)
+        return Response({"result" : "D"})
+
+@api_view(['POST'])
+def recommend_content2(request):
+    max_group = request.data.get('keyword')
 
     if max_group == 'A':
         movies = A_Movie_Recommendation.objects.order_by('?')[:3]
@@ -41,6 +86,7 @@ def recommend_content(request):
         song_serializer = BSongRecommendSerializer(songs, many=True)
 
 
+
     elif max_group == 'C':
         movies = C_Movie_Recommendation.objects.order_by('?')[:3]
         books = C_Book_Recommend.objects.order_by('?')[:3]
@@ -48,6 +94,7 @@ def recommend_content(request):
         movie_serializer = CMovieRecommendSerializer(movies, many=True)
         book_serializer = CBookRecommendSerializer(books, many=True)
         song_serializer = CSongRecommendSerializer(songs, many=True)
+
     
     else:
         movies = D_Movie_Recommendation.objects.order_by('?')[:3]
@@ -56,7 +103,7 @@ def recommend_content(request):
         movie_serializer = DMovieRecommendSerializer(movies, many=True)
         book_serializer = DBookRecommendSerializer(books, many=True)
         song_serializer = DSongRecommendSerializer(songs, many=True)
-
+        
 
     response_data = {
         'movies' : movie_serializer.data,
