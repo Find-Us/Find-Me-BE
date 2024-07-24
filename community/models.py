@@ -9,7 +9,7 @@ class Post(models.Model):
     content = models.TextField()#게시글 내용 (제한일단 안둠)
     created_at = models.DateTimeField(auto_now_add=True) # 날짜와 시간 설정 # 객체가 처음 생성될 때 이 필드에 현재 날짜와 시간이 자동으로 저장되도록 함 
     updated_at = models.DateTimeField(auto_now=True) # 게시글이 마지막으로 수정된 날짜와 시간을 저장 옵션으로 객체가 저장될 때마다 이 필드에 현재 날짜와 시간이 자동으로 갱신되도록 함 
-
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)  # 이미지 필드 추가
     def __str__(self): 
         return self.title # 이 메서드는 객체를 문자열로 나타낼 때 어떻게 표현할지를 정의, 예를 들어 Post 객체의 경우 제목(title)을 문자열로 반환
  
