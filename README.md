@@ -142,12 +142,12 @@ Backend
 
 ------------------------------------------------
 #### 커뮤니티 
--1. 게시글 목록 조회
--URL: /api/posts/
--Method: GET
--설명 : 모든 게시글을 조회합니다.
--Request Headers : Authorization: Bearer <token>
--Response json : [
+- 1. 게시글 목록 조회
+- URL: /api/posts/
+- Method: GET
+- 설명 : 모든 게시글을 조회합니다.
+- Request Headers : Authorization: Bearer <token>
+- Response json : [
     {
         "id": 1,
         "author": "username",
@@ -161,10 +161,10 @@ Backend
     ...
 ]
 
--2. 게시글 상세 조회
--URL: /api/posts/{post_id}/
--Method: GET
--설명 : 특정 게시글의 상세 정보를 조회합니다.
+- 2. 게시글 상세 조회
+- URL: /api/posts/{post_id}/
+- Method: GET
+- 설명 : 특정 게시글의 상세 정보를 조회합니다.
 
 -Request Headers:   Authorization: Bearer <token>
 -Response json : {
@@ -178,19 +178,19 @@ Backend
     "like_count": 5
 }
 
--3. 게시글 생성
--URL: /api/posts/
--Method: POST
--설명: 새로운 게시글을 생성합니다.
+- 3. 게시글 생성
+- URL: /api/posts/
+- Method: POST
+- 설명: 새로운 게시글을 생성합니다.
 
--Request Headers : Authorization: Bearer <token>
--Request Body json :
+- Request Headers : Authorization: Bearer <token>
+- Request Body json :
 {
     "title": "New Post Title",
     "content": "New Post Content",
     "image": null  # 또는 파일 업로드를 위한 멀티파트 폼 데이터
 }
--Response json :
+- Response json :
 {
     "id": 1,
     "author": "username",
@@ -202,18 +202,18 @@ Backend
     "like_count": 0
 }
 
--4. 댓글 추가
--URL: /api/posts/{post_id}/comments/
--Method: POST
--설명 : 특정 게시글에 댓글을 추가합니다.
+- 4. 댓글 추가
+- URL: /api/posts/{post_id}/comments/
+- Method: POST
+- 설명 : 특정 게시글에 댓글을 추가합니다.
 
--Request Headers: Authorization: Bearer <token>
--Request Body json:
+- Request Headers: Authorization: Bearer <token>
+- Request Body json:
 {
     "content": "This is a comment."
 }
 
--Response json :
+- Response json :
 {
     "id": 1,
     "post": 1,
@@ -222,13 +222,13 @@ Backend
     "created_at": "2023-07-26T12:34:56Z"
 }
 
--5. 좋아요 기능
--URL: /api/posts/{post_id}/like/
--Method: POST
--설명: 특정 게시글에 좋아요를 추가하거나 제거합니다.
+- 5. 좋아요 기능
+- URL: /api/posts/{post_id}/like/
+- Method: POST
+- 설명: 특정 게시글에 좋아요를 추가하거나 제거합니다.
 
--Request Headers: Authorization: Bearer <token>
--Response:
+- Request Headers: Authorization: Bearer <token>
+- Response:
 {
     "detail": "Like added."  # 또는 "Like removed."
 }
