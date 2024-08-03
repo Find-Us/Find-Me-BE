@@ -15,10 +15,48 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from findme.views import base_views
+from django.urls import include, path
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from post.views import PostListCreateAPIView
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+# API 문서화 세팅
+schema_view = get_schema_view(
+    openapi.Info(
+        title="find-me",
+        default_version="v1",
+        description="JWT auth API and post API documentation",
+        terms_of_service="http://findus.kro.kr/terms",
+        contact=openapi.Contact(email="jjlee2620@gmail.com"),
+        license=openapi.License(name="No License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', base_views.index, name='index'),
-]
+    path("admin/", admin.site.urls),
+    path("api/auth/", include("perm.urls")),
+    path('api/', include('post.urls')),
+    path('', PostListCreateAPIView.as_view(), name='post-list'),
+    
+    path(
+        "swagger/output.json",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    path(
+        "swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    path(
+        "redoc/",
+        schema_view.with_ui("redoc", cache_timeout=0),
+        name="schema-redoc",
+    ),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
